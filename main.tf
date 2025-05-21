@@ -1,9 +1,11 @@
-provider "random" {}
-
-resource "random_pet" "example" {
-  length = 2
+provider "aws" {
+  region = var.aws_region
 }
 
-output "pet_name" {
-  value = random_pet.example.id
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = var.bucket_name
+  tags = {
+    Environment = "Dev"
+    Purpose     = "Terraform mock setup"
+  }
 }
